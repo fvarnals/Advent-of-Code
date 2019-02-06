@@ -19,13 +19,14 @@ def getASII():
     data = f.read()
     num_data = map(ord,data)
     global codes
-    codes = [num_data[x:x+27] for x in xrange(0, len(num_data), 27)]
-    #spaces were included at the end of each string, therefore each must be 27 long
+    codes = [num_data[x:x+26] for x in xrange(0, len(num_data), 27)]
+    #each code is 26 characters long
 
 
 def doubles():
     x = len(codes) #len(codes) = 250, remember final number is not included in
                     #range(0,x)
+    #initialise variables for count of doubles, triples and quadruples
     global n_2
     global n_3
     global n_4
@@ -45,13 +46,13 @@ def doubles():
             n_4 += 1
 
 
-    print("There are %d doubles overall" %n_2)
+    print("\nThere are %d doubles overall" %n_2)
     print("There are %d triples overall" %n_3)
-    print("There are %d quadruples overall" %n_4)
+    print("There are %d quadruples overall\n" %n_4)
 
 def checksum():
     checksum = (n_2 * n_3 * n_4)
-    print("Checksum = %d" %checksum)
+    print("\nChecksum = %d\n" %checksum)
 getASII()
 doubles()
 
@@ -65,11 +66,16 @@ if n_4 == 0:
 
 checksum()
 
+
 def vari_check():
-    codes_array = np.asarray(codes)
+    codes_array = np.asarray(codes) #length = 250
+
     for n in range(0,len(codes_array)):
         for m in range(0,len(codes_array)):
+            #calculate difference in code ASCII values
             sub = np.subtract(codes_array[n],codes_array[m])
+            #square each value and sum, to avoid coincidental total difference
+            #of 1
             check = sum(sub**2)
             if check == 1:
                 global code1
@@ -80,11 +86,12 @@ def vari_check():
                 second_code = ''.join(chr(i) for i in codes_array[m])
                 return first_code, second_code
 
+#find list of same letters in 2 codes identified as almost identical
 def same_letters():
     diff = np.subtract(code1,code2)
     indexes = np.where(diff==0)
     letters = ''.join(chr(i) for i in code1[indexes])
     return letters
 
-print(vari_check())
-print(same_letters())
+print('The two box IDs which vary by one letter:\n%s \n%s' %vari_check())
+print('\nLetters in common are:\n%s' %same_letters())
