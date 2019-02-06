@@ -8,8 +8,6 @@ find the first frequency value reached twice (may require multiple passes over d
 with open("day1_input.txt") as f:
         data = [int(i) for i in f]
 
-print len(data)
-
 #find resultant frequency
 print("Resultant Frequency: %d" %sum(data))
 
