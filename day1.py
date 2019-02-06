@@ -1,3 +1,9 @@
+'''
+Challenge:
+a) From dataset of frequency changes (day1_input.txt) find resultant frequency following all changes.
+b) Through the process of looping through frequency changes, 
+find the first frequency value reached twice (may require multiple passes over data)
+'''
 #read data from txt
 with open("day1_input.txt") as f:
         data = [int(i) for i in f]
