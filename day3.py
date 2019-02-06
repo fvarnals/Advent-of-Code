@@ -1,3 +1,16 @@
+'''
+For a piece fabric (at least 1000 inches on each side) claims have been made proposing which patch of fabric 
+should be cut out.
+
+All claims have an ID and consist of a single rectangle with edges parallel to the edges of the fabric. 
+A claim like #123 @ 3,2: 5x4 means that claim ID 123 specifies a rectangle 3 inches from the left edge, 
+2 inches from the top edge, 5 inches wide, and 4 inches tall.
+
+a) Calculate how many square inches of fabric are within two or more claims.
+
+b) Find the ID of the only claim that doesn't overlap with any others.
+'''
+
 import numpy as np
 
 # read data from file
@@ -40,14 +53,14 @@ for n in range(0,len(inputs)/5):
             patch[x,y] +=1
 
 #test patch
-print(patch[222:232,280:299])
+#print(patch[222:232,280:299])
 
-#calculate number of patches with >=2
+#calculate number of patches within 2 or more claims.
 overlaps = np.count_nonzero(patch>=2)
 print('There are %d inches in more than 2 different submissions\n' %overlaps)
 
 #run loop again but this time add up values of "patch" and divide by num_points
-#to get patch average
+#to get patch average, if patch average = 1 then the claim is unique
 unique_patches = []
 for n in range(0,len(inputs)/5):
     x_start = (inputs[(n*5+1)])
@@ -68,14 +81,10 @@ for n in range(0,len(inputs)/5):
         unique_patches.append(n+1)
 print('Unique patches identified: %s' %(unique_patches))
 
-#try plotting the data
-#things we need =
-#plot of patches values as coordinates
 
 import matplotlib.pyplot as plt
-#plt.plot(patch)
-#plt.show()
 
+# visualise the submissions of patches
 plt.imshow(patch)
 plt.show()
 plt.imshow(patch, interpolation='nearest')
