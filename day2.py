@@ -1,3 +1,14 @@
+'''
+a) From list of box IDs (i.e. 'abcdef'):
+- Count the number that have an ID containing exactly two of any letter
+- Separately count those with exactly three of any letter. 
+- Multiply those two counts together to get a rudimentary checksum.
+
+b) 
+- Find the boxes with IDs which differ by exactly one character at the same position in both strings.
+- Return the letters are common between the two correct box IDs.
+'''
+
 import numpy as np
 import collections
 
